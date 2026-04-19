@@ -1,0 +1,13 @@
+.grid {
+  margin: 0 auto;
+  width: 95%;
+}
+.imgCategory {
+  margin-bottom: 1rem;
+}
+.categoryName {
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 130%;
+  color: black;
+}

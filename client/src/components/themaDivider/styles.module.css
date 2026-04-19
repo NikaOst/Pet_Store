@@ -1,0 +1,40 @@
+.themaDivider {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 2.5rem;
+}
+
+.themaDivider .category {
+  padding: 0.5rem 1rem;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+}
+
+.themaDivider h2 {
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 110%;
+}
+
+.dividerCategory {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.dividerCategory span {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 126%;
+  color: #8b8b8b;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 0.9px;
+  background-color: #dddddd;
+}

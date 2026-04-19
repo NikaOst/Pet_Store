@@ -1,0 +1,33 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.8rem 2.5rem;
+  align-items: center;
+  border: 1px solid #dddddd;
+}
+.nav img {
+  cursor: pointer;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 130%;
+}
+
+.nav ul a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.activeLink span {
+  opacity: 100%;
+  color: #0d50ff;
+}
+
+.inactiveLink span {
+  opacity: 50%;
+}

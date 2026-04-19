@@ -1,0 +1,29 @@
+.breadcrumbsContainer {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 2.6rem;
+  margin-bottom: 2.5rem;
+}
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.breadcrumbLink {
+  text-decoration: none;
+  color: inherit;
+}
+.breadcrumbsContainer span {
+  padding: 0.5rem 1rem;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-family: 1rem;
+  font-weight: 500;
+  line-height: 126%;
+}
+.dividerLine {
+  width: 2rem;
+  height: 1px;
+  background-color: #dddddd;
+}

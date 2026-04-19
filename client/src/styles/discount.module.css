@@ -1,0 +1,40 @@
+.products {
+  width: 95%;
+  margin: 0 auto;
+}
+.discountContainer {
+  margin-bottom: 6.6rem;
+}
+.products h2 {
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 110%;
+  margin-bottom: 2.5rem;
+}
+.filter {
+  margin-bottom: 2.5rem;
+  display: flex;
+  gap: 2.5rem;
+}
+.filter div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.filter div input {
+  border-radius: 6px;
+  border: 1px solid #dddddd;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 126%;
+}
+.filterPrice input {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: 112px;
+}
+.filter span {
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 130%;
+}

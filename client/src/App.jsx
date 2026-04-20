@@ -17,7 +17,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/card" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/categories/:id" element={<CategoryPage />} />
         <Route path="/discounts" element={<DiscountProductsPage />} />

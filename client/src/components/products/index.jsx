@@ -9,38 +9,46 @@ import { Paper, Grid } from '@mui/material';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
-  //   padding: theme.spacing(2),
-  textAlign: 'center',
+  border: '1px solid #DDDDDD',
+  borderRadius: '12px',
   color: (theme.vars ?? theme).palette.text.secondary,
-  height: '350px',
   boxShadow: 'none',
+  cursor: 'pointer',
   ...theme.applyStyles('dark', {
     backgroundColor: '#1A2027',
   }),
 }));
 
-function Products({ autoScroll }) {
+function Products({ autoScroll, products, onProductClick }) {
   return (
     <div className={styles.gridProducts}>
       {autoScroll ? (
         <Swiper
           modules={[Autoplay]}
-          spaceBetween={16}
+          spaceBetween={32}
           slidesPerView={4}
           grabCursor
           loop
           autoplay={{ delay: 3000, disableOnInteraction: false }}>
-          {Array.from(Array(8)).map((_, index) => (
+          {products?.map((product, index) => (
             <SwiperSlide key={index}>
-              <Item>
+              <Item onClick={() => onProductClick?.(product.id)}>
                 <div className={styles.imgContainer}>
-                  <img className={styles.imgProduct} src="" alt="product" />
+                  <img className={styles.imgProduct} src={product.image} alt="product" />
                 </div>
                 <div className={styles.productDetails}>
-                  <p className={styles.productName}>Dry Dog Food for Adult...</p>
+                  <p className={styles.productName}>{product.title}</p>
                   <div className={styles.price}>
-                    <p>$80</p>
-                    <span>$100</span>
+                    {product.discont_price ? (
+                      <div>
+                        <p>${product.discont_price}</p>
+                        <span>${product.price}</span>
+                      </div>
+                    ) : (
+                      <div>
+                        <p>${product.price}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </Item>
@@ -48,18 +56,26 @@ function Products({ autoScroll }) {
           ))}
         </Swiper>
       ) : (
-        <Grid container spacing={2}>
-          {Array.from(Array(8)).map((_, index) => (
+        <Grid container spacing={3} rowSpacing={3}>
+          {products?.map((product, index) => (
             <Grid key={index} size={3}>
-              <Item>
+              <Item onClick={() => onProductClick?.(product.id)}>
                 <div className={styles.imgContainer}>
-                  <img className={styles.imgProduct} src="" alt="product" />
+                  <img className={styles.imgProduct} src={product.image} alt="product" />
                 </div>
                 <div className={styles.productDetails}>
-                  <p className={styles.productName}>Dry Dog Food for Adult...</p>
+                  <p className={styles.productName}>{product.title}</p>
                   <div className={styles.price}>
-                    <p>$80</p>
-                    <span>$100</span>
+                    {product.discont_price ? (
+                      <div>
+                        <p>${product.discont_price}</p>
+                        <span>${product.price}</span>
+                      </div>
+                    ) : (
+                      <div>
+                        <p>${product.price}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </Item>

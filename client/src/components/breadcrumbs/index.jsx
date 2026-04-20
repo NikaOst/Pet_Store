@@ -1,5 +1,6 @@
 import styles from './styles.module.css';
-import { Breadcrumbs, Link, Typography } from '@mui/material';
+import { Breadcrumbs, Typography } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 function BreadcrumbsComponent({ path }) {
   return (
@@ -8,21 +9,21 @@ function BreadcrumbsComponent({ path }) {
         separator={<div className={styles.dividerLine} />}
         aria-label="breadcrumb"
         sx={{ '& .MuiBreadcrumbs-separator': { margin: 0 } }}>
-        <Link underline="hover" color="inherit" href="/">
+        <NavLink className={styles.breadcrumbLink} to={'/'}>
           <span>Main page</span>
-        </Link>
+        </NavLink>
         {path.map((p, indx) => {
           {
             if (path.length !== indx + 1) {
               return (
-                <Link underline="hover" color="inherit" href={p.path}>
+                <NavLink className={styles.breadcrumbLink} to={`${p.path}`}>
                   <span>{p.name}</span>
-                </Link>
+                </NavLink>
               );
             } else {
               return (
                 <Typography sx={{ color: 'text.primary' }}>
-                  <span>{p.name}</span>
+                  <span style={{ color: 'black' }}>{p.name}</span>
                 </Typography>
               );
             }

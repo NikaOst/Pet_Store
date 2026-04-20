@@ -61,7 +61,8 @@
 .formContainer form input:focus {
   outline: none;
 }
-.formContainer form button,
+.cuponNotSubmitted,
+.cuponSubmitted,
 .formContainer form input {
   padding: 1rem 2rem;
   font-weight: 500;
@@ -69,10 +70,25 @@
   line-height: 130%;
   border-radius: 6px;
 }
-.formContainer form button {
+.cuponNotSubmitted {
   background-color: white;
   border: none;
   cursor: pointer;
+}
+.cuponSubmitted {
+  color: #0d50ff;
+  border: none;
+  background-color: #f1f3f4;
+}
+.formContainer img {
+  width: 100%;
+  max-width: 783px;
+  height: 100%;
+  max-height: 360px;
+  align-self: flex-end;
+}
+form span {
+  color: white;
 }
 /* --------------------------------------------------- */
 .categories,

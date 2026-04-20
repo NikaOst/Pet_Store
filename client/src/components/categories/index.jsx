@@ -9,43 +9,43 @@ import { Paper, Grid } from '@mui/material';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
-  //   padding: theme.spacing(2),
   textAlign: 'center',
   color: (theme.vars ?? theme).palette.text.secondary,
-  height: '350px',
   boxShadow: 'none',
+  width: 'center',
+  cursor: 'pointer',
   ...theme.applyStyles('dark', {
     backgroundColor: '#1A2027',
   }),
 }));
 
-function Categories({ autoScroll }) {
+function Categories({ categories, autoScroll, onCategoryClick }) {
   return (
     <div className={styles.grid}>
       {autoScroll ? (
         <Swiper
           modules={[Autoplay]}
-          spaceBetween={16}
+          spaceBetween={32}
           slidesPerView={4}
           grabCursor
           loop
           autoplay={{ delay: 3000, disableOnInteraction: false }}>
-          {Array.from(Array(8)).map((_, index) => (
+          {categories?.map((category, index) => (
             <SwiperSlide key={index}>
-              <Item>
-                <img className={styles.imgCategory} src="" alt="category" />
-                <p className={styles.categoryName}>Dry & Wet Food</p>
+              <Item onClick={() => onCategoryClick?.(category.id)}>
+                <img className={styles.imgCategory} src={category.image} alt="category" />
+                <p className={styles.categoryName}>{category.title}</p>
               </Item>
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
-        <Grid container spacing={2}>
-          {Array.from(Array(8)).map((_, index) => (
+        <Grid container spacing={4} rowSpacing={4}>
+          {categories?.map((category, index) => (
             <Grid key={index} size={3}>
-              <Item>
-                <img className={styles.imgCategory} src="" alt="category" />
-                <p className={styles.categoryName}>Dry & Wet Food</p>
+              <Item onClick={() => onCategoryClick?.(category.id)}>
+                <img className={styles.imgCategory} src={category.image} alt="category" />
+                <p className={styles.categoryName}>{category.title}</p>
               </Item>
             </Grid>
           ))}

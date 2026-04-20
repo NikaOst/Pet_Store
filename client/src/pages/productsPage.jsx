@@ -1,14 +1,34 @@
 import BreadcrumbsComponent from '../components/breadcrumbs';
 import Products from '../components/products';
 import styles from '../styles/products.module.css';
-import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
+import { Box, MenuItem, FormControl, Select } from '@mui/material';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchProducts } from '../redux/slices/productsSlice';
+import { useNavigate } from 'react-router-dom';
 
 function ProductsPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [sortValue, setSortValue] = useState('by default');
+  const [discountChecked, setDiscountChecked] = useState(false);
+  const { products } = useSelector((state) => state.products);
 
   const handleChange = (event) => {
     setSortValue(event.target.value);
+  };
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  const onProductClick = (id) => {
+    navigate(`/products/${id}`);
+  };
+
+  const discountProducts = () => {
+    return products.filter((product) => product.discont_price !== null);
   };
 
   return (
@@ -24,7 +44,12 @@ function ProductsPage() {
           </div>
           <div className={styles.filterDiscount}>
             <span>Discounted items</span>
-            <input type="text" />
+            <input
+              type="checkbox"
+              className={styles.checkbox}
+              checked={discountChecked}
+              onChange={() => setDiscountChecked((prev) => !prev)}
+            />
           </div>
           <div className={styles.filterSorted}>
             <span>Sorted</span>
@@ -46,15 +71,19 @@ function ProductsPage() {
                     '& .MuiSelect-select': { padding: '0.5rem 1rem' },
                   }}>
                   <MenuItem value={'by default'}>by default</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={'price: high-low'}>price: high-low</MenuItem>
+                  <MenuItem value={'price: low-high'}>price: low-high</MenuItem>
                 </Select>
               </FormControl>
             </Box>
           </div>
         </div>
       </div>
-      <Products autoScroll={false} />
+      <Products
+        autoScroll={false}
+        products={!discountChecked ? products : discountProducts()}
+        onProductClick={onProductClick}
+      />
     </div>
   );
 }

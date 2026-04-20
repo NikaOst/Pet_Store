@@ -3,12 +3,31 @@ import Products from '../components/products';
 import styles from '../styles/discount.module.css';
 import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchProducts } from '../redux/slices/productsSlice';
+import { useNavigate } from 'react-router-dom';
 
 function DiscountProductsPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [sortValue, setSortValue] = useState('by default');
+  const { products } = useSelector((state) => state.products);
 
   const handleChange = (event) => {
     setSortValue(event.target.value);
+  };
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  const discountProducts = () => {
+    return products.filter((product) => product.discont_price !== null);
+  };
+
+  const onProductClick = (id) => {
+    navigate(`/products/${id}`);
   };
 
   return (
@@ -42,15 +61,15 @@ function DiscountProductsPage() {
                     '& .MuiSelect-select': { padding: '0.5rem 1rem' },
                   }}>
                   <MenuItem value={'by default'}>by default</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={'price: high-low'}>price: high-low</MenuItem>
+                  <MenuItem value={'price: low-high'}>price: low-high</MenuItem>
                 </Select>
               </FormControl>
             </Box>
           </div>
         </div>
       </div>
-      <Products autoScroll={false} />
+      <Products autoScroll={false} products={discountProducts()} onProductClick={onProductClick} />
     </div>
   );
 }

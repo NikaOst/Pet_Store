@@ -10,14 +10,20 @@ import DiscountProductsPage from './pages/discountProductsPage';
 import ProductPage from './pages/productPage';
 import ProductsPage from './pages/productsPage';
 import Footer from './components/footer';
+import ScrollToTop from './scrollToStart';
+import { useSelector } from 'react-redux';
+import CartModalWindow from './components/cartModalWindow';
 
 function App() {
+  const { status } = useSelector((state) => state.cart);
   return (
     <div className="mainContainer">
+      {status === 'succeeded' && <CartModalWindow />}
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/card" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/categories/:id" element={<CategoryPage />} />
         <Route path="/discounts" element={<DiscountProductsPage />} />

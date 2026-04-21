@@ -1,10 +1,15 @@
 import styles from './styles.module.css';
 import logo from '../../assets/icons/logo.svg';
 import cartImg from '../../assets/icons/basket=empty.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Badge } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 function Navbar() {
+  const { cart } = useSelector((state) => state.cart);
+  const { pathname } = useLocation();
+  const isCartPage = pathname === '/cart';
+
   return (
     <nav className={styles.nav}>
       <img src={logo} alt="logo" />
@@ -38,25 +43,33 @@ function Navbar() {
           </NavLink>
         </li>
       </ul>
-      <Badge
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        badgeContent={5}
-        sx={{
-          '& .MuiBadge-badge': {
-            backgroundColor: '#0D50FF',
-            color: 'white',
-            transform: 'translate(0, 30%)',
-            width: '26px',
-            height: '26px',
-            borderRadius: '50%',
-            fontSize: '12px',
-          },
-        }}>
-        <img src={cartImg} alt="cart" />
-      </Badge>
+      {cart.length > 0 && !isCartPage ? (
+        <Badge
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          badgeContent={cart.length}
+          sx={{
+            '& .MuiBadge-badge': {
+              backgroundColor: '#0D50FF',
+              color: 'white',
+              transform: 'translate(0, 30%)',
+              width: '26px',
+              height: '26px',
+              borderRadius: '50%',
+              fontSize: '12px',
+            },
+          }}>
+          <NavLink to={'/cart'}>
+            <img src={cartImg} alt="cart" />
+          </NavLink>
+        </Badge>
+      ) : (
+        <NavLink to={'/cart'}>
+          <img src={cartImg} alt="cart" />
+        </NavLink>
+      )}
     </nav>
   );
 }

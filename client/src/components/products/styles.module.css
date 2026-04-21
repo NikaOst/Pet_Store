@@ -9,21 +9,40 @@
 }
 .imgContainer {
   border-bottom: 1px solid #dddddd;
-  margin-bottom: 1.25rem;
+  /* margin-bottom: 1.25rem; */
+  width: 100%;
+  min-height: 284px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: relative;
+  justify-content: center;
+}
+.imgProduct {
+  width: 100%;
+  max-height: 284px;
+  object-fit: contain;
+  object-position: bottom;
 }
 .productName {
   color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.price {
+.price div {
   display: flex;
   gap: 1rem;
-  margin-left: 10%;
 }
 .productName,
 .price span {
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 130%;
+}
+.productDetails {
+  padding: 1.25rem 2rem;
 }
 .price p {
   font-weight: 600;
@@ -34,4 +53,27 @@
 .price span {
   text-decoration: line-through;
   align-self: flex-end;
+}
+
+.addToCartBtn {
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.imgContainer:hover .addToCartBtn {
+  opacity: 1;
+}
+.discountBlock {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: #0d50ff;
+  padding: 0.24rem 0.5rem;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 130%;
 }

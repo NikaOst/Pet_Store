@@ -1,0 +1,35 @@
+.cuponNotSubmitted,
+.cuponSubmitted,
+.formContainer form input {
+  padding: 1rem 2rem;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 130%;
+  border-radius: 6px;
+}
+.cuponNotSubmitted {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+.cuponSubmitted {
+  color: #0d50ff;
+  border: none;
+  background-color: #f1f3f4;
+  pointer-events: none;
+}
+.formContainer button:hover {
+  background-color: #282828;
+  color: white;
+  cursor: default;
+}
+.orderBtn {
+  background-color: #0d50ff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 130%;
+}

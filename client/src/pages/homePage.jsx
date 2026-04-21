@@ -9,6 +9,13 @@ import 'swiper/css/navigation';
 import formPic from '../assets/images/formImg.png';
 import Products from '../components/products';
 import Categories from '../components/categories';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchCategories } from '../redux/slices/categoriesSlice';
+import { fetchProducts } from '../redux/slices/productsSlice';
+import { useNavigate } from 'react-router-dom';
+
+import Form from '../components/form';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -24,10 +31,35 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function HomePage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { categories } = useSelector((state) => state.categories);
+  const { products } = useSelector((state) => state.products);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  const discountProducts = () => {
+    return products.filter((product) => product.discont_price !== null);
+  };
+
+  const onCategoryClick = (id) => {
+    navigate(`/categories/${id}`);
+  };
+
+  const onProductClick = (id) => {
+    navigate(`/products/${id}`);
+  };
+
   return (
     <div>
       <div className={styles.firstContainer}>
-        <h1>Amazing Discounts on Pets Products!</h1>
+        <h1>
+          Amazing Discounts
+          <br /> on Pets Products!
+        </h1>
         <Button
           component="a"
           href="#discount"
@@ -41,29 +73,27 @@ function HomePage() {
             padding: '1rem 3.5rem',
             width: '100%',
             maxWidth: '13.6rem',
+            '&:hover': {
+              backgroundColor: '#282828',
+            },
           }}>
           Check out
         </Button>
       </div>
       <div className={styles.categories}>
-        <ThemaDivider thema="Categories" category="All categories " />
-        <Categories autoScroll={true} />
+        <ThemaDivider thema="Categories" category="All categories" path={'/categories'} />
+        <Categories autoScroll={true} categories={categories} onCategoryClick={onCategoryClick} />
       </div>
       <div id="discount" className={styles.discontForm}>
         <h1>5% off on the first order</h1>
         <div className={styles.formContainer}>
           <img src={formPic} alt="formPic" />
-          <form>
-            <input type="text" placeholder="Name" />
-            <input type="tel" placeholder="Phone number" />
-            <input type="email" placeholder="Email" />
-            <button type="submit">Get a discount</button>
-          </form>
+          <Form btnText={'Get a discount'} />
         </div>
       </div>
       <div className={styles.sale}>
-        <ThemaDivider thema="Sale" category="All sales" />
-        <Products autoScroll={true} />
+        <ThemaDivider thema="Sale" category="All sales" path={'/discounts'} />
+        <Products autoScroll={true} products={discountProducts()} onProductClick={onProductClick} />
       </div>
     </div>
   );

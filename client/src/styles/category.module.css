@@ -1,0 +1,57 @@
+.products {
+  width: 95%;
+  margin: 0 auto;
+}
+.productsContainer {
+  margin-bottom: 5rem;
+}
+.products h2 {
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 110%;
+  margin-bottom: 2.5rem;
+}
+.filter {
+  margin-bottom: 2.5rem;
+  display: flex;
+  gap: 2.5rem;
+}
+.filter div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.filter div input {
+  border-radius: 6px;
+  border: 1px solid #dddddd;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 126%;
+}
+.filterPrice input {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: 112px;
+}
+.filter span {
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 130%;
+}
+.checkbox {
+  appearance: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.checkbox:checked {
+  background-color: #0d50ff;
+  border-color: #0d50ff;
+  background-image: url('../assets/icons/check.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+}

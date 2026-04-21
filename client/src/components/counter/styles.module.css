@@ -1,0 +1,24 @@
+.counter {
+  display: flex;
+}
+.counter button {
+  width: 58px;
+  height: 58px;
+  padding: 1.06rem;
+  background-color: white;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  z-index: 1;
+}
+.counter input {
+  border: 1px solid #dddddd;
+  margin-left: -10px;
+  text-align: center;
+  max-width: 96px;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 130%;
+}
+.counter button:last-child {
+  margin-left: -10px;
+}

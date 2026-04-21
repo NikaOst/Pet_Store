@@ -61,25 +61,6 @@
 .formContainer form input:focus {
   outline: none;
 }
-.cuponNotSubmitted,
-.cuponSubmitted,
-.formContainer form input {
-  padding: 1rem 2rem;
-  font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 130%;
-  border-radius: 6px;
-}
-.cuponNotSubmitted {
-  background-color: white;
-  border: none;
-  cursor: pointer;
-}
-.cuponSubmitted {
-  color: #0d50ff;
-  border: none;
-  background-color: #f1f3f4;
-}
 .formContainer img {
   width: 100%;
   max-width: 783px;

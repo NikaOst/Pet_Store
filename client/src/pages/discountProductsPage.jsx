@@ -7,16 +7,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import { useNavigate } from 'react-router-dom';
+import { sort } from '../middleware/sort';
+import Filter from '../components/filter';
 
 function DiscountProductsPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [sortValue, setSortValue] = useState('by default');
   const { products } = useSelector((state) => state.products);
-
-  const handleChange = (event) => {
-    setSortValue(event.target.value);
-  };
+  const [priceFrom, setPriceFrom] = useState(null);
+  const [priceTo, setPriceTo] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -30,46 +30,25 @@ function DiscountProductsPage() {
     navigate(`/products/${id}`);
   };
 
+  const getProducts = () => {
+    const data = discountProducts();
+    return sort({ priceFrom, priceTo, flag: sortValue, products: data });
+  };
+
   return (
     <div className={styles.discountContainer}>
       <BreadcrumbsComponent path={[{ name: 'All sales', path: '' }]} />
       <div className={styles.products}>
         <h2>Discounted items</h2>
-        <div className={styles.filter}>
-          <div className={styles.filterPrice}>
-            <span>Price</span>
-            <input type="text" placeholder="from" />
-            <input type="text" placeholder="to" />
-          </div>
-          <div className={styles.filterSorted}>
-            <span>Sorted</span>
-            <Box sx={{ width: 200 }}>
-              <FormControl fullWidth>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={sortValue}
-                  onChange={handleChange}
-                  sx={{
-                    width: 200,
-                    fontWeight: 500,
-                    fontSize: '1rem',
-                    lineHeight: '126%',
-                    borderRadius: '6px',
-                    border: '1px solid #dddddd',
-                    '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
-                    '& .MuiSelect-select': { padding: '0.5rem 1rem' },
-                  }}>
-                  <MenuItem value={'by default'}>by default</MenuItem>
-                  <MenuItem value={'price: high-low'}>price: high-low</MenuItem>
-                  <MenuItem value={'price: low-high'}>price: low-high</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </div>
-        </div>
+        <Filter
+          setPriceFrom={setPriceFrom}
+          setPriceTo={setPriceTo}
+          sortValue={sortValue}
+          setSortValue={setSortValue}
+          needCheckbox={false}
+        />
       </div>
-      <Products autoScroll={false} products={discountProducts()} onProductClick={onProductClick} />
+      <Products autoScroll={false} products={getProducts()} onProductClick={onProductClick} />
     </div>
   );
 }

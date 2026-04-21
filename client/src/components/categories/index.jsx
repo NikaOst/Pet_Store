@@ -12,7 +12,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: (theme.vars ?? theme).palette.text.secondary,
   boxShadow: 'none',
-  width: 'center',
+  width: '100%',
   cursor: 'pointer',
   ...theme.applyStyles('dark', {
     backgroundColor: '#1A2027',

@@ -6,8 +6,7 @@ import styles from '../styles/product.module.css';
 import { fetchProductById } from '../redux/slices/productsSlice';
 import { addToCart } from '../redux/slices/cartSlice';
 import { Button } from '@mui/material';
-import minus from '../assets/icons/minus.svg';
-import plus from '../assets/icons/plus.svg';
+import Counter from '../components/counter';
 
 function ProductPage() {
   const { id } = useParams();
@@ -53,9 +52,14 @@ function ProductPage() {
           <h1>{product?.title}</h1>
           <div className={styles.price}>
             {product?.discont_price ? (
-              <div>
+              <div className={styles.priceBox}>
                 <p>${product?.discont_price}</p>
-                <span>${product?.price}</span>
+                <span>
+                  ${product?.price}{' '}
+                  <div className={styles.discountBlock}>
+                    -{Math.round((1 - product.discont_price / product.price) * 100)}%
+                  </div>
+                </span>
               </div>
             ) : (
               <div>
@@ -64,26 +68,7 @@ function ProductPage() {
             )}
           </div>
           <div className={styles.productAmount}>
-            <div className={styles.counter}>
-              <button
-                disabled={availableProduct}
-                onClick={() => {
-                  if (count > 1) setCount((c) => c - 1);
-                }}>
-                <img src={minus} alt="minus" />
-              </button>
-              <input
-                type="text"
-                value={count}
-                disabled={availableProduct}
-                onChange={(e) => {
-                  if (e.target.value > 1) setCount(+e.target.value);
-                }}
-              />
-              <button disabled={availableProduct} onClick={() => setCount((c) => c + 1)}>
-                <img src={plus} alt="plus" />
-              </button>
-            </div>
+            <Counter count={count} setCount={setCount} availableProduct={availableProduct} />
             <Button
               variant="contained"
               sx={{
@@ -94,6 +79,9 @@ function ProductPage() {
                 lineHeight: '130%',
                 padding: '1rem 2rem',
                 width: '19.75rem',
+                '&:hover': {
+                  backgroundColor: '#282828',
+                },
               }}
               onClick={() => addProductToCart(product)}
               disabled={availableProduct}>

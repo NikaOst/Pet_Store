@@ -13,10 +13,20 @@
   border-radius: 6px;
 }
 
+.category:hover {
+  background-color: #f1f3f4;
+}
+
+.category:active {
+  background-color: white;
+  color: black;
+}
+
 .themaDivider h2 {
   font-weight: 700;
   font-size: 4rem;
   line-height: 110%;
+  flex-shrink: 0;
 }
 
 .dividerCategory {
@@ -24,6 +34,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  cursor: pointer;
 }
 
 .dividerCategory span {

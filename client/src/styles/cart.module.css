@@ -1,0 +1,146 @@
+.cartMainContainer {
+  margin-top: 2.5rem;
+}
+.mainContent {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.carts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 50%;
+}
+.prodCart {
+  display: flex;
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  position: relative;
+}
+.prodContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  padding: 2rem;
+}
+.prodImage {
+  width: 12.5rem;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.prodContentTitle {
+  display: flex;
+  align-items: center;
+}
+.prodContentTitle img {
+  position: absolute;
+  right: 5%;
+}
+.prodContentTitle span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+}
+.prodContentTitle img {
+  cursor: pointer;
+}
+.prodContentTitle span {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 130%;
+}
+.prodContent div:last-child {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.prodContent div:last-child span {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 110%;
+}
+.imageConteiner {
+  border-left: 1px solid #dddddd;
+  width: 12.5rem;
+  height: auto;
+  display: flex;
+  text-align: center;
+}
+/* --------------------------------------- */
+.orderContainer {
+  background-color: #f1f3f4;
+  border-radius: 12px;
+  padding: 2rem;
+}
+.formContainer form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+}
+.formContainer span {
+  color: black;
+}
+.formContainer form input::placeholder {
+  color: #8b8b8b;
+}
+.formContainer form input {
+  width: 100%;
+  min-width: 516px;
+  background-color: white;
+  border: 1px solid #dddddd;
+  color: black;
+}
+.titleItemContainer {
+  width: 90%;
+  margin: 0 auto;
+}
+.orderContainer h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 110%;
+}
+.items {
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 130%;
+  color: #8b8b8b;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25px;
+}
+.titleItemContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.24rem;
+}
+.titleItemContainer div {
+  display: flex;
+  justify-content: space-between;
+}
+.price {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 110%;
+  align-self: flex-end;
+}
+.emptyCart {
+  width: 95%;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 130%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 5rem;
+}

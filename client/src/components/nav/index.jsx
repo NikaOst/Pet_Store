@@ -1,12 +1,15 @@
 import styles from './styles.module.css';
 import logo from '../../assets/icons/logo.svg';
 import cartImg from '../../assets/icons/basket=empty.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Badge } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 function Navbar() {
   const { cart } = useSelector((state) => state.cart);
+  const { pathname } = useLocation();
+  const isCartPage = pathname === '/cart';
+
   return (
     <nav className={styles.nav}>
       <img src={logo} alt="logo" />
@@ -40,7 +43,7 @@ function Navbar() {
           </NavLink>
         </li>
       </ul>
-      {cart.length > 0 ? (
+      {cart.length > 0 && !isCartPage ? (
         <Badge
           anchorOrigin={{
             vertical: 'top',

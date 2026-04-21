@@ -4,7 +4,9 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { styled } from '@mui/material/styles';
-import { Paper, Grid } from '@mui/material';
+import { Paper, Grid, Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../redux/slices/cartSlice';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -20,6 +22,11 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Products({ autoScroll, products, onProductClick }) {
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state.cart);
+
+  const isInCart = (productId) => cart.some((prod) => prod.id === productId);
+
   return (
     <div className={styles.gridProducts}>
       {autoScroll ? (
@@ -35,6 +42,11 @@ function Products({ autoScroll, products, onProductClick }) {
               <Item onClick={() => onProductClick?.(product.id)}>
                 <div className={styles.imgContainer}>
                   <img className={styles.imgProduct} src={product.image} alt="product" />
+                  {product.discont_price && (
+                    <div className={styles.discountBlock}>
+                      -{Math.round((1 - product.discont_price / product.price) * 100)}%
+                    </div>
+                  )}
                 </div>
                 <div className={styles.productDetails}>
                   <p className={styles.productName}>{product.title}</p>
@@ -62,6 +74,41 @@ function Products({ autoScroll, products, onProductClick }) {
               <Item onClick={() => onProductClick?.(product.id)}>
                 <div className={styles.imgContainer}>
                   <img className={styles.imgProduct} src={product.image} alt="product" />
+                  {product.discont_price && (
+                    <div className={styles.discountBlock}>
+                      -{Math.round((1 - product.discont_price / product.price) * 100)}%
+                    </div>
+                  )}
+                  <Button
+                    className={styles.addToCartBtn}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      if (!isInCart(product.id)) {
+                        dispatch(addToCart({ product, count: 1 }));
+                      }
+                    }}
+                    variant="contained"
+                    disabled={isInCart(product.id)}
+                    sx={{
+                      textTransform: 'none',
+                      backgroundColor: isInCart(product.id) ? 'white' : '#0D50FF',
+                      fontWeight: 600,
+                      fontSize: '1.25rem',
+                      lineHeight: '130%',
+                      padding: '1rem 3.5rem',
+                      width: '100%',
+                      position: 'absolute',
+                      bottom: 0,
+                      '&:hover': {
+                        backgroundColor: '#282828',
+                      },
+                      '&.Mui-disabled': {
+                        backgroundColor: 'white',
+                        color: 'black',
+                      },
+                    }}>
+                    {isInCart(product.id) ? 'Added' : 'Add to cart'}
+                  </Button>
                 </div>
                 <div className={styles.productDetails}>
                   <p className={styles.productName}>{product.title}</p>

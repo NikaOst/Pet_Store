@@ -14,8 +14,8 @@ import { useEffect } from 'react';
 import { fetchCategories } from '../redux/slices/categoriesSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { fetchSendDiscount } from '../redux/slices/discountSlice';
+
+import Form from '../components/form';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -35,14 +35,6 @@ function HomePage() {
   const navigate = useNavigate();
   const { categories } = useSelector((state) => state.categories);
   const { products } = useSelector((state) => state.products);
-  const { status } = useSelector((state) => state.sendDiscount);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({ mode: 'onChange' });
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -59,24 +51,6 @@ function HomePage() {
 
   const onProductClick = (id) => {
     navigate(`/products/${id}`);
-  };
-
-  const formSubmit = (data) => {
-    dispatch(fetchSendDiscount(data));
-    reset();
-  };
-
-  const emailValidation = (email) => {
-    if (!email) return 'Поле не должно быть пустым';
-    const reg = /^\s*(?!.*[._-]{2})[\w.-]+@([\w-]+\.)+[\w-]{2,24}\s*$/;
-    if (!reg.test(email)) return 'Должен быть корректный формат email';
-    return true;
-  };
-
-  const telValidation = (tel) => {
-    if (!tel) return 'Поле не должно быть пустым';
-    const mask = /^\+49\d{6}\s\d{2}-\d{2}$/;
-    if (!mask.test(tel)) return 'Формат(маска): +49XXXXXX XX-XX';
   };
 
   return (
@@ -99,47 +73,26 @@ function HomePage() {
             padding: '1rem 3.5rem',
             width: '100%',
             maxWidth: '13.6rem',
+            '&:hover': {
+              backgroundColor: '#282828',
+            },
           }}>
           Check out
         </Button>
       </div>
       <div className={styles.categories}>
-        <ThemaDivider thema="Categories" category="All categories " />
+        <ThemaDivider thema="Categories" category="All categories" path={'/categories'} />
         <Categories autoScroll={true} categories={categories} onCategoryClick={onCategoryClick} />
       </div>
       <div id="discount" className={styles.discontForm}>
         <h1>5% off on the first order</h1>
         <div className={styles.formContainer}>
           <img src={formPic} alt="formPic" />
-          <form onSubmit={handleSubmit(formSubmit)}>
-            <input
-              {...register('name', { required: 'Все поля обазательны' })}
-              type="text"
-              placeholder="Name"
-            />
-            {errors.name && <span>{errors.name.message}</span>}
-            <input
-              {...register('phone_number', { validate: telValidation })}
-              type="tel"
-              placeholder="Phone number"
-            />
-            {errors.phone_number && <span>{errors.phone_number.message}</span>}
-            <input
-              {...register('email', { validate: emailValidation })}
-              type="email"
-              placeholder="Email"
-            />
-            {errors.email && <span>{errors.email.message}</span>}
-            <button
-              className={status === 'succeeded' ? styles.cuponSubmitted : styles.cuponNotSubmitted}
-              type="submit">
-              {status === 'succeeded' ? 'Request Submitted' : 'Get a discount'}
-            </button>
-          </form>
+          <Form btnText={'Get a discount'} />
         </div>
       </div>
       <div className={styles.sale}>
-        <ThemaDivider thema="Sale" category="All sales" />
+        <ThemaDivider thema="Sale" category="All sales" path={'/discounts'} />
         <Products autoScroll={true} products={discountProducts()} onProductClick={onProductClick} />
       </div>
     </div>

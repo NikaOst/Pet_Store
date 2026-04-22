@@ -15,6 +15,7 @@ function CartPage() {
   const { cart, status } = useSelector((state) => state.cart);
 
   const counts = cart.map((prod) => prod.count || 1);
+
   const totalPrice = counts.reduce((acc, count, indx) => {
     const prod = cart[indx];
     const price = prod.discont_price ?? prod.price;

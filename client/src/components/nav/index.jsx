@@ -12,7 +12,9 @@ function Navbar() {
 
   return (
     <nav className={styles.nav}>
-      <img src={logo} alt="logo" />
+      <NavLink to={'/'}>
+        <img src={logo} alt="logo" />
+      </NavLink>
       <ul>
         <li>
           <NavLink

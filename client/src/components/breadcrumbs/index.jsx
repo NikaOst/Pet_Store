@@ -16,13 +16,13 @@ function BreadcrumbsComponent({ path }) {
           {
             if (path.length !== indx + 1) {
               return (
-                <NavLink className={styles.breadcrumbLink} to={`${p.path}`}>
+                <NavLink key={indx} className={styles.breadcrumbLink} to={`${p.path}`}>
                   <span>{p.name}</span>
                 </NavLink>
               );
             } else {
               return (
-                <Typography sx={{ color: 'text.primary' }}>
+                <Typography key={indx} sx={{ color: 'text.primary' }}>
                   <span style={{ color: 'black' }}>{p.name}</span>
                 </Typography>
               );
